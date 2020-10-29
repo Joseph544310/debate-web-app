@@ -1,0 +1,40 @@
+
+.form-style-5{
+	padding: 1em 2em;
+	margin: 1em auto;
+	padding: 2em;
+	background: beige;
+	border-radius: 0.8em;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.form-style-5 label {
+	display: block;
+    margin-bottom: 0.66em;
+    font-weight: bold;
+}
+
+.form-style-5 input{
+    width: 100%;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	margin-bottom: 3em;
+}
+
+.form-style-5 input[type="submit"]
+{
+	position: relative;
+	display: block;
+	padding: 0.33em;
+	color: #FFF;
+	margin: 0 auto;
+	background: #1abc9c;
+	text-align: center;
+	font-style: normal;
+	border: 1px solid #16a085;
+	border-width: 1px 1px 3px;
+	margin-bottom: 0.33em;
+}
+.form-style-5 input[type="submit"]:hover
+{
+	background: #109177;
+}
