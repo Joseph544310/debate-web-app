@@ -8,6 +8,7 @@ function Authentication(props) {
   const [loginPassword, setLoginPassword] = useState('')
   const [registerUsername, setRegisterUsername] = useState('')
   const [registerPassword, setRegisterPassword] = useState('')
+  const [registerConfirmPassword, setRegisterConfirmPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   
   const reset = () => {
@@ -15,6 +16,7 @@ function Authentication(props) {
     setLoginPassword('');
     setRegisterUsername('');
     setRegisterPassword('');
+    setRegisterConfirmPassword('');
     setErrorMessage('');
   }
 
@@ -40,6 +42,10 @@ function Authentication(props) {
 
   const register = (event) => {
     event.preventDefault();
+    if (registerPassword !== registerConfirmPassword) {
+      setErrorMessage('Passwords do not match');
+      return;
+    }
     Axios({
       method: "POST",
       data: {
@@ -102,6 +108,8 @@ function Authentication(props) {
           <input type='text' id='username' onChange={e => setRegisterUsername(e.target.value)} value={registerUsername} required/>
           <label htmlFor="password">Password</label>
           <input type='password' id='password' onChange= {e => setRegisterPassword(e.target.value)} value={registerPassword} required/>
+          <label htmlFor="password2">Confirm Password</label>
+          <input type='password' id='password2' onChange= {e => setRegisterConfirmPassword(e.target.value)} value={registerConfirmPassword} required/>
           <input className="btn btn-success" type='submit' value='Register'/>
           <p>{errorMessage}</p>
           <a href="#register"
