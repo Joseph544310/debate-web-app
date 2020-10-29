@@ -10,7 +10,7 @@ export const ProtectedRoute = ({component: Component, ...rest}) => {
         Axios({
             method: "GET",
             withCredentials: true,
-            url: "http://localhost:5000/user"
+            url: "http://localhost:5000/auth/user"
           }).then(res => {
               setUser(res.data);
               setLoading(false);

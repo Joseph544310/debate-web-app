@@ -29,7 +29,7 @@ function Authentication(props) {
         password: loginPassword
       },
       withCredentials: true,
-      url: "http://localhost:5000/login"
+      url: "http://localhost:5000/auth/login"
     }).then(res => {
       if (res.data.message === "Success"){
         props.history.push('/home')
@@ -53,7 +53,7 @@ function Authentication(props) {
         password: registerPassword
       },
       withCredentials: true,
-      url: "http://localhost:5000/register"
+      url: "http://localhost:5000/auth/register"
     }).then(res => {
       if (res.data.message === 'Success') {
         Axios({
@@ -63,7 +63,7 @@ function Authentication(props) {
             password: registerPassword
           },
           withCredentials: true,
-          url: "http://localhost:5000/login"
+          url: "http://localhost:5000/auth/login"
         }).then(res => {
           if (res.data.message === "Success"){
             props.history.push('/home')

@@ -7,7 +7,7 @@ const Home = (props) => {
     Axios({
       method: "DELETE",
       withCredentials: true,
-      url: "http://localhost:5000/logout"
+      url: "http://localhost:5000/auth/logout"
     }).then(res => {
       props.history.push('/');
     }).catch(err => console.log(err));
