@@ -6,26 +6,32 @@ const Debate = require('../models/debate');
 //create side
 router.post('/', (req, res) => {
     
+    try {
     // find debate
-    Debate.findById(req.params.id, async (err, debate) => {
-        if (err) {
-            res.status(404);
-            res.send("Debate not found");
-        }
+        Debate.findById(req.params.id, async (err, debate) => {
+            if (err) {
+                res.status(404);
+                res.send("Debate not found");
+            }
 
-        // create side
-        const newSide = new Side({
-            name: req.body.name,
-            votes: []
-        });
-        await newSide.save();
+            // create side
+            const newSide = new Side({
+                name: req.body.name,
+                votes: []
+            });
+            await newSide.save();
 
-        // add side to debate
-        debate.sides.push(newSide);
-        debate.save();
+            // add side to debate
+            debate.sides.push(newSide);
+            debate.save();
 
-        res.send("Success");
-    })
+            res.send("Success");
+        })
+    }
+    catch{
+        res.status(400);
+        res.send("Failure");
+    }
 
 });
 
