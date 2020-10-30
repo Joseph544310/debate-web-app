@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
         Debate.find({}, (err, allDebates) => {
             if (err) throw err;
             else {
-                res.json(allDebates)
+                res.json({debates: allDebates})
             }
         });
     }
