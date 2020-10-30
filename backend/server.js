@@ -8,6 +8,7 @@ const passport = require('passport');
 
 //requiring routes
 const authRoutes = require('./routes/auth');
+const sideRoutes = require('./routes/sides');
 
 app = express();
 
@@ -46,6 +47,7 @@ require('./passportConfig')(passport);
 
 //routes
 app.use('/auth', authRoutes);
+app.use('debates/:id', sideRoutes)
 
 app.listen(5000, 'localhost', () => {
     console.log("listening on port 5000");
