@@ -2,6 +2,21 @@ const express = require('express');
 const router = express.Router({mergeParams: true});
 const Debate = require('../models/debate');
 
+router.get('/', (req, res) => {
+    try {
+        Debate.find({}, (err, allDebates) => {
+            if (err) throw err;
+            else {
+                res.json(allDebates)
+            }
+        });
+    }
+    catch {
+        res.status(400);
+        res.send("Failure");
+    }
+});
+
 router.post('/', async (req, res) => {
     
     try {
