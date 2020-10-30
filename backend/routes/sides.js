@@ -4,7 +4,7 @@ const Side = require('../models/side');
 const Debate = require('../models/debate');
 
 //create side
-router.post('/', async (req, res) => {
+router.post('/', (req, res) => {
     
     // find debate
     Debate.findById(req.params.id, async (err, debate) => {

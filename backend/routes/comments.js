@@ -4,7 +4,7 @@ const Comment = require('../models/comment');
 const Debate = require('../models/debate');
 
 //create comment
-router.post('/', async (req, res) => {
+router.post('/', (req, res) => {
     
     // find debate
     Debate.findById(req.params.id, async (err, debate) => {
