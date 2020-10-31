@@ -9,23 +9,44 @@ const CreateDebateForm = props => {
 
   const createDebate = event => {
     event.preventDefault();
+
+    // create debate
     Axios({
       method: "POST",
       data: {
         title: title
       },
       withCredentials: true,
-      url: 'http://localhost/debates'
+      url: 'http://localhost:5000/debates/'
     }).then( async (res) => {
       const id = res.data.id;
-      const sidesUrl = `http://localhost/debates/${id}/sides`;
-
+      const sidesUrl = `http://localhost:5000/debates/${id}/sides`;
+      // create sides
+      sidesNames.forEach(async(sideName) => {
+        await Axios({
+          method:'POST',
+          data: {
+            name: sideName
+          },
+          withCredentials: true,
+          url: sidesUrl
+        });
+      })
     }).catch(err => console.log(err))
   }
 
   const changeCountHandler = event => {
     setSidesCount(event.target.value);
-    setSidesNames(new Array(event.target.value).fill(''));
+    const newArray = [];
+    newArray.length = event.target.value;
+    newArray.fill('');
+    setSidesNames(newArray);
+  }
+
+  const setNameHandler = (event, index) => {
+    const newArray = sidesNames.slice();
+    newArray[index] = event.target.value;
+    setSidesNames(newArray);
   }
 
   return (
@@ -38,7 +59,7 @@ const CreateDebateForm = props => {
         return (
         <span key={index}>
           <label htmlFor={`side${index}`}>{`Side ${index + 1}`}</label>
-          <input type='text' id={`side${index}`} onChange={e => {setSidesNames([])}} value={sideName} required/>
+          <input type='text' id={`side${index}`} onChange={e => setNameHandler(e, index)} value={sideName} required/>
         </span>
         );
       })}
