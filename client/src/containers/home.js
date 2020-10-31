@@ -2,6 +2,7 @@ import Axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import CreateDebateForm from '../components/createDebateForm'
+import DebateSummary from '../components/debateSummary'
 
 const Home = (props) => {
 
@@ -30,11 +31,7 @@ const Home = (props) => {
   return (
     <div className="Home">
 		  <h1>Hello</h1>
-      {debates.map( debate => {
-        return (
-        <h3> {debate.title} </h3>
-        );
-      })}
+      {debates.map( debate => <DebateSummary key={debate._id} debate={debate}/>)}
       <CreateDebateForm/>
       <div>
         <Button variant="danger" onClick={() => logout()}>Logout</Button>
