@@ -31,7 +31,9 @@ router.post('/', async (req, res) => {
         });
 
         await newDebate.save();
-        res.send("Success");
+        res.json({
+            id: newDebate._id
+        });
     }
     catch{
         res.status(400);
