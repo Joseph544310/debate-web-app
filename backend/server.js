@@ -49,9 +49,9 @@ require('./passportConfig')(passport);
 
 //routes
 app.use('/auth', authRoutes);
-app.use('debates/', debateRoutes);
-app.use('debates/:id/sides', sideRoutes);
-app.use('debates/:id/comments', commentRoutes);
+app.use('/debates', debateRoutes);
+app.use('/debates/:id/sides', sideRoutes);
+app.use('/debates/:id/comments', commentRoutes);
 
 app.listen(5000, 'localhost', () => {
     console.log("listening on port 5000");

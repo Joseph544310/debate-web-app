@@ -15,10 +15,10 @@ const CreateDebateForm = props => {
         title: title
       },
       withCredentials: true,
-      url: 'http://localhost/debates/'
+      url: 'http://localhost/debates'
     }).then( async (res) => {
       const id = res.data.id;
-      const sidesUrl = `http://localhost/debates/${id}/sides/`;
+      const sidesUrl = `http://localhost/debates/${id}/sides`;
 
     }).catch(err => console.log(err))
   }
@@ -35,10 +35,12 @@ const CreateDebateForm = props => {
       <label htmlFor="sidesCount">Number of sides</label>
       <input type='number' min={2} max={10} onChange={changeCountHandler} value={sidesCount}/>
       {sidesNames.map( (sideName, index) => {
+        return (
         <span key={index}>
-          <label htmlFor={`side${index}`}>{`Side ${index}`}</label>
-          <input type='text' id={`side${index}`} onChange={} value={sideName} required/>
+          <label htmlFor={`side${index}`}>{`Side ${index + 1}`}</label>
+          <input type='text' id={`side${index}`} onChange={e => {setSidesNames([])}} value={sideName} required/>
         </span>
+        );
       })}
       <input className="btn btn-success" type='submit' value='Create'/>
     </form>

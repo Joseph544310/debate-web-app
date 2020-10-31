@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
+import CreateDebateForm from '../components/createDebateForm'
 
 const Home = (props) => {
 
@@ -10,7 +11,7 @@ const Home = (props) => {
     Axios({
       method: "GET",
       withCredentials: true,
-      url: "http://localhost:5000/debates/"
+      url: "http://localhost:5000/debates"
     }).then(res => {
       setDebates(res.data.debates);
     }).catch(err => console.log(err))
@@ -30,8 +31,11 @@ const Home = (props) => {
     <div className="Home">
 		  <h1>Hello</h1>
       {debates.map( debate => {
+        return (
         <h3> {debate.title} </h3>
+        );
       })}
+      <CreateDebateForm/>
       <div>
         <Button variant="danger" onClick={() => logout()}>Logout</Button>
 			</div>
