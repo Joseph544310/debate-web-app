@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import {useParams} from 'react-router-dom'
 import {Card, Button, ListGroup} from 'react-bootstrap'
 import Axios from 'axios'
+import './debateDetails.css'
 
 const DebateDetails = props => {
 
     const [debate, setDebate] = useState(false)
     const [sides, setSides] = useState([]);
     const [comments, setComments] = useState([]);
-    const [commentContent, setCommentContent] = useState('')
+    const [commentContent, setCommentContent] = useState('');
+    const [votedSide, setVotedSide] = useState(false);
     const {id} = useParams();
 
     useEffect( () => {
@@ -54,15 +56,25 @@ const DebateDetails = props => {
         }).catch( err => console.log(err));
     }
 
+    const castVote = (side_id) => {
+        Axios({
+            method: 'POST',
+            withCredentials: true,
+            url: `http://localhost:5000/debates/${id}/sides/${side_id}/vote`
+        }).then( res => {
+            setVotedSide(side_id);
+        }).catch(err => console.log(err));
+    }
+
     return (
         <Card>
             <Card.Header>{debate?debate.title:null}</Card.Header>
             <Card.Body>
                 {sides.map(side => {
                     return (
-                        <Card key={side._id}>
+                        <Card key={side._id} className={side._id===votedSide?"voted":"notVoted"}>
                             <Card.Title>{side.name}</Card.Title>
-                            <Button variant='primary'>Support</Button>
+                            <Button variant='primary' onClick = { () => castVote(side._id)}>Support</Button>
                         </Card>
                     );
                 })}

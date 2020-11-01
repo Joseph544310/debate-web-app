@@ -67,4 +67,38 @@ router.post('/', (req, res) => {
 
 });
 
+// add vote
+router.post('/:side_id/vote', (req, res) => {
+    try {
+        // find debate
+        Debate.findById(req.params.id, async (err, debate) => {
+            if (err) {
+                res.status(404);
+                res.send("Debate not found");
+            }
+
+            // remove user vote from every side of the debate
+            for( const side_id of debate.sides) {
+                await Side.findByIdAndUpdate(side_id, {$pull: {votes: req.user._id}},
+                     (err, res) => {
+                        if (err) throw err;
+                    })            
+            }
+
+            // add user vote to requested side
+            Side.findById(req.params.side_id, (err, side) => {
+                if (err) throw err;
+                side.votes.push(req.user._id);
+                side.save();
+            })
+
+            res.send("Success");
+        })
+    }
+    catch{
+        res.status(400);
+        res.send("Failure");
+    }
+})
+
 module.exports = router;
