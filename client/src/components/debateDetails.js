@@ -29,7 +29,9 @@ const DebateDetails = props => {
             withCredentials: true,
             url: `http://localhost:5000/debates/${id}/sides`
         }).then( res => {
-            setSides(res.data.sides)
+            setSides(res.data.sides);
+            console.log(res.data)
+            setVotedSide(res.data.votedSide);
         }).catch(err => console.log(err));
 
         // Get comments

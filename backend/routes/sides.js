@@ -14,15 +14,17 @@ router.get('/', (req, res) => {
             }
 
             const sides = []
+            let votedSide = false;
             for (const [index, id] of debate.sides.entries()) {
                 await Side.findById(id, (err, side) => {
                     if (err) throw err;
-                    sides.push(side)
-                    
+                    sides.push(side);
+                    if (side.votes.includes(req.user._id)) votedSide = side._id
                     //when last callback is done, return
                     if (index === debate.sides.length - 1) {
                         res.json({
-                            sides: sides
+                            sides: sides,
+                            votedSide: votedSide
                         })
                     }
                 }
