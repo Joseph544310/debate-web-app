@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import {Card} from 'react-bootstrap'
 import Axios from 'axios'
 
@@ -15,11 +16,13 @@ const DebateSummary = props => {
             console.log(res)
             setSides(res.data.sides)
         }).catch(err => console.log(err));
-    }, [])
+    }, [props.debate._id])
 
     return (
         <Card>
-            <Card.Header>{props.debate.title}</Card.Header>
+            <Card.Header>
+                <Link to={`/debates/${props.debate._id}`}>{props.debate.title}</Link>
+            </Card.Header>
             <Card.Body>
                 {sides.map(side => {
                     return (

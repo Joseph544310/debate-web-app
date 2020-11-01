@@ -41,4 +41,19 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.get('/:id', (req, res) => {
+    try {
+        Debate.findById(req.params.id, (err, debate) => {
+            if (err) throw err;
+            else {
+                res.json({debate: debate})
+            }
+        });
+    }
+    catch {
+        res.status(400);
+        res.send("Failure");
+    }
+})
+
 module.exports = router;

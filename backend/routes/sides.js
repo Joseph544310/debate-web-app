@@ -18,6 +18,8 @@ router.get('/', (req, res) => {
                 await Side.findById(id, (err, side) => {
                     if (err) throw err;
                     sides.push(side)
+                    
+                    //when last callback is done, return
                     if (index === debate.sides.length - 1) {
                         res.json({
                             sides: sides
