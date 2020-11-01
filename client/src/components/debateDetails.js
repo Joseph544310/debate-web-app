@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import {useParams} from 'react-router-dom'
-import {Card, Button} from 'react-bootstrap'
+import {Card, Button, ListGroup} from 'react-bootstrap'
 import Axios from 'axios'
 
 const DebateDetails = props => {
 
     const [debate, setDebate] = useState(false)
     const [sides, setSides] = useState([]);
+    const [comments, setComments] = useState([]);
+    const [commentContent, setCommentContent] = useState('')
     const {id} = useParams();
 
     useEffect( () => {
@@ -18,6 +20,7 @@ const DebateDetails = props => {
           }).then(res => {
             setDebate(res.data.debate);
           }).catch(err => console.log(err))
+
         // Get sides
         Axios({
             method: 'GET',
@@ -26,7 +29,30 @@ const DebateDetails = props => {
         }).then( res => {
             setSides(res.data.sides)
         }).catch(err => console.log(err));
+
+        // Get comments
+        Axios({
+            method: 'GET',
+            withCredentials: true,
+            url: `http://localhost:5000/debates/${id}/comments`
+        }).then( res => {
+            setComments(res.data.comments)
+        }).catch(err => console.log(err));
     }, [id])
+
+    const createComment = (event) => {
+        event.preventDefault();
+        Axios({
+            method: 'POST',
+            data: {
+                content: commentContent
+            },
+            withCredentials: true,
+            url: `http://localhost:5000/debates/${id}/comments`
+        }).then( res => {
+            setComments([...comments, res.data.comment]);
+        }).catch( err => console.log(err));
+    }
 
     return (
         <Card>
@@ -40,8 +66,18 @@ const DebateDetails = props => {
                         </Card>
                     );
                 })}
+                <ListGroup variant="flush">
+                    {comments.map(comment => {
+                        return (
+                            <ListGroup.Item key={comment._id}>{comment.author.username}: {comment.content}</ListGroup.Item>
+                        );
+                    })}
+                </ListGroup>
+                <form onSubmit={createComment}>
+                    <input type='text' onChange={e => setCommentContent(e.target.value)} value={commentContent}/>
+                    <input className="btn btn-success" type='submit' value='Add Comment'/>
+                </form>
             </Card.Body>
-            <p>Comments section goes here</p>
         </Card>
     );
 }
