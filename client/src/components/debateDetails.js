@@ -11,7 +11,7 @@ const DebateDetails = props => {
             withCredentials: true,
             url: `http://localhost:5000/debates/${props.debate._id}/sides`
         }).then( res => {
-            setSides(res.data)
+            setSides(res.data.sides)
         }).catch(err => console.log(err));
     }, [props.debate._id])
 

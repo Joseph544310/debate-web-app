@@ -6,21 +6,22 @@ const DebateSummary = props => {
 
     const [sides, setSides] = useState([]);
     useEffect( () => {
+        console.log(`http://localhost:5000/debates/${props.debate._id}/sides`)
         Axios({
             method: 'GET',
             withCredentials: true,
             url: `http://localhost:5000/debates/${props.debate._id}/sides`
         }).then( res => {
-            setSides(res.data)
+            console.log(res)
+            setSides(res.data.sides)
         }).catch(err => console.log(err));
-    }, [props.debate._id])
+    }, [])
 
     return (
         <Card>
             <Card.Header>{props.debate.title}</Card.Header>
             <Card.Body>
                 {sides.map(side => {
-                    console.log(side);
                     return (
                         <Card key={side._id}>
                             <Card.Body>
