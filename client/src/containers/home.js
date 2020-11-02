@@ -23,7 +23,6 @@ const Home = (props) => {
     <div className="Home">
       <Container>
         <UserNav {...props}/>
-        <h1>Hello</h1>
         {debates.map( debate => <DebateSummary key={debate._id} debate={debate}/>)}
         <CreateDebateForm/>
       </Container>

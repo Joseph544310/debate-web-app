@@ -91,7 +91,7 @@ function Authentication(props) {
           <input type='password' id='password' onChange= {e => setLoginPassword(e.target.value)} value={loginPassword} required/>
           <input className="btn btn-success" type='submit' value='Login'/>
           <p>{errorMessage}</p>
-          <a href="#login"
+          <a href="#register"
           onClick={() => {
             reset();
             setPage('register')
@@ -112,7 +112,7 @@ function Authentication(props) {
           <input type='password' id='password2' onChange= {e => setRegisterConfirmPassword(e.target.value)} value={registerConfirmPassword} required/>
           <input className="btn btn-success" type='submit' value='Register'/>
           <p>{errorMessage}</p>
-          <a href="#register"
+          <a href="#login"
           onClick={() => {
             reset();
             setPage('login')
