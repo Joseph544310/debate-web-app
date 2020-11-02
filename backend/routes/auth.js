@@ -7,7 +7,9 @@ const passport = require('passport');
 //authentication routes 
 router.get('/user', (req, res)=> {
     console.log(req.user)
-    res.send(req.user);
+    res.json({
+        user: req.user
+    });
 })
 
 router.post('/login', (req,res,next) => {
