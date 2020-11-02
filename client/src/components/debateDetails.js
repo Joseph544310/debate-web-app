@@ -69,28 +69,31 @@ const DebateDetails = props => {
     }
 
     return (
-        <Card>
+        <Card className="debateCard">
             <Card.Header>{debate?debate.title:null}</Card.Header>
             <Card.Body>
                 {sides.map(side => {
                     return (
                         <Card key={side._id} className={side._id===votedSide?"voted":"notVoted"}>
                             <Card.Title>{side.name}</Card.Title>
-                            <Button variant='primary' onClick = { () => castVote(side._id)}>Support</Button>
+                            <Button variant='primary' onClick = { () => castVote(side._id)}>Vote</Button>
                         </Card>
                     );
                 })}
-                <ListGroup variant="flush">
+
+                <ListGroup variant="flush" className='comments'>
+                    <h4>Comments</h4>
                     {comments.map(comment => {
                         return (
                             <ListGroup.Item key={comment._id}>{comment.author.username}: {comment.content}</ListGroup.Item>
                         );
                     })}
+                    <form onSubmit={createComment}>
+                        <input type='text' onChange={e => setCommentContent(e.target.value)} value={commentContent} required/>
+                        <input className="btn btn-primary" type='submit' value='Add Comment'/>
+                    </form>
                 </ListGroup>
-                <form onSubmit={createComment}>
-                    <input type='text' onChange={e => setCommentContent(e.target.value)} value={commentContent}/>
-                    <input className="btn btn-success" type='submit' value='Add Comment'/>
-                </form>
+
             </Card.Body>
         </Card>
     );

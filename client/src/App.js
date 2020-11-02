@@ -3,8 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Landing from './containers/landing';
 import {Route, BrowserRouter, Switch} from 'react-router-dom'
 import Home from './containers/home';
-import DebateDetails from './components/debateDetails'
 import { ProtectedRoute } from './containers/protectedRoute'
+import CreateDebate from './containers/createDebate'
+import Debate from './containers/debate';
 
 function App() {
 
@@ -14,7 +15,8 @@ function App() {
         <Switch>
           <Route path='/' exact component={Landing}/>
           <ProtectedRoute path='/home' component={Home}/>
-          <ProtectedRoute path='/debates/:id' component={DebateDetails}/>
+          <ProtectedRoute path='/debates/new' component={CreateDebate}/>
+          <ProtectedRoute path='/debates/:id' component={Debate}/>
           <Route path='*' component={() => "404 NOT FOUND"} />
         </Switch>
       </BrowserRouter>

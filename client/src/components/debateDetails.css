@@ -1,3 +1,17 @@
 .voted {
     background-color: green;
 }
+
+.voted, .notVoted {
+    width: 18rem;
+    display: inline-block;
+}
+
+.comments {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.debateCard {
+    margin: 20px;
+}

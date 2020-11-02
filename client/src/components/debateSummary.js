@@ -27,7 +27,7 @@ const DebateSummary = props => {
             <Card.Body>
                 {sides.map(side => {
                     return (
-                        <Card key={side._id} className="sideCard" style={{ width: '18rem' }}>
+                        <Card key={side._id} className="sideCard">
                             <Card.Body>
                                 <Card.Title>{side.name}</Card.Title>
                             </Card.Body>      

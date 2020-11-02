@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Button, Navbar, Nav, NavLink } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './userNav.css'
 
 const UserNav = (props) => {
@@ -34,9 +35,11 @@ const UserNav = (props) => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
-              <NavLink>{user}</NavLink>
+              <Nav.Link as={Link} to='/home'>Home</Nav.Link>
+              <Nav.Link as={Link} to='/debates/new'>Start Debate</Nav.Link>
             </Nav>
             <Nav className="ml-auto">
+              <NavLink>{user}</NavLink>              
               <Button variant="danger" onClick={() => logout()}>Logout</Button>
             </Nav>
           </Navbar.Collapse>

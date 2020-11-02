@@ -1,7 +1,6 @@
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import CreateDebateForm from '../components/createDebateForm'
 import DebateSummary from '../components/debateSummary'
 import UserNav from '../components/userNav'
 
@@ -24,7 +23,6 @@ const Home = (props) => {
       <Container>
         <UserNav {...props}/>
         {debates.map( debate => <DebateSummary key={debate._id} debate={debate}/>)}
-        <CreateDebateForm/>
       </Container>
 
     </div>

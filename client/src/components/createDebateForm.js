@@ -32,6 +32,7 @@ const CreateDebateForm = props => {
           url: sidesUrl
         });
       })
+      props.history.push('/home')
     }).catch(err => console.log(err))
   }
 
@@ -50,7 +51,7 @@ const CreateDebateForm = props => {
   }
 
   return (
-    <form onSubmit={createDebate}>
+    <form onSubmit={createDebate} className='form-style-5'>
       <label htmlFor="title">Title</label>
       <input type='text' id='title' onChange={e => setTitle(e.target.value)} value={title} required/>
       <label htmlFor="sidesCount">Number of sides</label>
