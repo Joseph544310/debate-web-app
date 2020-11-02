@@ -30,6 +30,7 @@ const DebateSummary = props => {
                         <Card key={side._id} className="sideCard">
                             <Card.Body>
                                 <Card.Title>{side.name}</Card.Title>
+                                <p>{side.votes.length}</p>
                             </Card.Body>      
                         </Card>
                     );
