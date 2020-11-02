@@ -82,9 +82,9 @@ function Authentication(props) {
   return (
     <div className="Auth">
       {page === 'login'?
-      <div>
+      <div className="form-style-5">
         <h3>Login</h3>
-        <form onSubmit={login} className="form-style-5">
+        <form onSubmit={login}>
           <label htmlFor="username">Username</label>
           <input type='text' id='username' onChange={e => setLoginUsername(e.target.value)} value={loginUsername} required/>
           <label htmlFor="password">Password</label>
@@ -101,9 +101,9 @@ function Authentication(props) {
       </div>
       
       :
-      <div>
+      <div className="form-style-5">
         <h3>Register</h3>
-        <form onSubmit={register} className="form-style-5">
+        <form onSubmit={register}>
           <label htmlFor="username">Username</label>
           <input type='text' id='username' onChange={e => setRegisterUsername(e.target.value)} value={registerUsername} required/>
           <label htmlFor="password">Password</label>
