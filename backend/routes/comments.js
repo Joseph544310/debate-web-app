@@ -2,6 +2,7 @@ const express = require("express");
 const router  = express.Router({mergeParams: true});
 const Comment = require('../models/comment');
 const Debate = require('../models/debate');
+const middlewares = require('../middlewares')
 
 // get comments
 router.get('/', (req, res) => {
@@ -71,5 +72,27 @@ router.post('/', (req, res) => {
     }
 
 });
+
+// delete comment
+router.delete('/:comment_id', middlewares.checkCommentOwnership, (req, res) => {
+    
+    try {
+        Debate.findByIdAndUpdate(req.params.id, {$pull: {comments: req.params.comment_id}},
+            (err, result) => {
+                if (err) throw err;
+            }
+        )
+        
+        Comment.findByIdAndDelete(req.params.comment_id, (err, result) => {
+            if (err) throw err;
+        })
+    
+        res.send('Success')
+    }
+    catch {
+        res.status(400).send('Failure')
+    }
+
+})
 
 module.exports = router;
