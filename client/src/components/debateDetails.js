@@ -21,7 +21,7 @@ const DebateDetails = props => {
         Axios({
             method: "GET",
             withCredentials: true,
-            url: `http://localhost:5000/auth/user`
+            url: `/api/auth/user`
           }).then(res => {
             setUser(res.data.user);
           }).catch(err => console.log(err))
@@ -30,7 +30,7 @@ const DebateDetails = props => {
         Axios({
             method: "GET",
             withCredentials: true,
-            url: `http://localhost:5000/debates/${id}`
+            url: `/api/debates/${id}`
           }).then(res => {
             setDebate(res.data.debate);
           }).catch(err => console.log(err))
@@ -39,7 +39,7 @@ const DebateDetails = props => {
         Axios({
             method: 'GET',
             withCredentials: true,
-            url: `http://localhost:5000/debates/${id}/sides`
+            url: `/api/debates/${id}/sides`
         }).then( res => {
             setSides(res.data.sides);
             setVotedSide(res.data.votedSide);
@@ -49,7 +49,7 @@ const DebateDetails = props => {
         Axios({
             method: 'GET',
             withCredentials: true,
-            url: `http://localhost:5000/debates/${id}/comments`
+            url: `/api/debates/${id}/comments`
         }).then( res => {
             setComments(res.data.comments)
         }).catch(err => console.log(err));
@@ -63,7 +63,7 @@ const DebateDetails = props => {
                 content: commentContent
             },
             withCredentials: true,
-            url: `http://localhost:5000/debates/${id}/comments`
+            url: `/api/debates/${id}/comments`
         }).then( res => {
             setCommentContent('')
             setComments([...comments, res.data.comment]);
@@ -74,7 +74,7 @@ const DebateDetails = props => {
         Axios({
             method: 'POST',
             withCredentials: true,
-            url: `http://localhost:5000/debates/${id}/sides/${side_id}/vote`
+            url: `/api/debates/${id}/sides/${side_id}/vote`
         }).then( res => {
             setVotedSide(side_id);
         }).catch(err => console.log(err));
@@ -84,7 +84,7 @@ const DebateDetails = props => {
         Axios({
             method: 'DELETE',
             withCredentials: true,
-            url: `http://localhost:5000/debates/${id}/comments/${comment_id}`
+            url: `/api/debates/${id}/comments/${comment_id}`
         }).then( res => {
             setComments([...comments.slice(0, index), ...comments.slice(index+1)]);
         }).catch(err => console.log(err))

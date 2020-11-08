@@ -17,10 +17,10 @@ const CreateDebateForm = props => {
         title: title
       },
       withCredentials: true,
-      url: 'http://localhost:5000/debates/'
+      url: '/api/debates/'
     }).then( async (res) => {
       const id = res.data.id;
-      const sidesUrl = `http://localhost:5000/debates/${id}/sides`;
+      const sidesUrl = `/api/debates/${id}/sides`;
       // create sides
       sidesNames.forEach(async(sideName) => {
         await Axios({

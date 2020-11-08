@@ -8,11 +8,11 @@ const DebateSummary = props => {
 
     const [sides, setSides] = useState([]);
     useEffect( () => {
-        console.log(`http://localhost:5000/debates/${props.debate._id}/sides`)
+        console.log(`/api/debates/${props.debate._id}/sides`)
         Axios({
             method: 'GET',
             withCredentials: true,
-            url: `http://localhost:5000/debates/${props.debate._id}/sides`
+            url: `/api/debates/${props.debate._id}/sides`
         }).then( res => {
             console.log(res)
             setSides(res.data.sides)

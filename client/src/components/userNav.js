@@ -12,7 +12,7 @@ const UserNav = (props) => {
     Axios({
       method: "GET",
       withCredentials: true,
-      url: "http://localhost:5000/auth/user"
+      url: "/api/auth/user"
     }).then(res => {
       setUser(res.data.user.username);
     }).catch(err => console.log(err))
@@ -22,7 +22,7 @@ const UserNav = (props) => {
     Axios({
       method: "DELETE",
       withCredentials: true,
-      url: "http://localhost:5000/auth/logout"
+      url: "/api/auth/logout"
     }).then(res => {
       props.history.push('/');
     }).catch(err => console.log(err));

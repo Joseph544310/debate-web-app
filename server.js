@@ -48,12 +48,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./passportConfig')(passport);
 
-//routes
-app.use('/auth', authRoutes);
-app.use('/debates', debateRoutes);
-app.use('/debates/:id/sides', sideRoutes);
-app.use('/debates/:id/comments', commentRoutes);
+// frontend
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+}
 
-app.listen(5000, 'localhost', () => {
-    console.log("listening on port 5000");
+//routes
+app.use('/api/auth', authRoutes);
+app.use('/api/debates', debateRoutes);
+app.use('/api/debates/:id/sides', sideRoutes);
+app.use('/api/debates/:id/comments', commentRoutes);
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, 'localhost', () => {
+    console.log(`listening on port ${PORT}`);
 });

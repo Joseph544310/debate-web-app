@@ -12,7 +12,7 @@ const Home = (props) => {
     Axios({
       method: "GET",
       withCredentials: true,
-      url: "http://localhost:5000/debates"
+      url: "/api/debates"
     }).then(res => {
       setDebates(res.data.debates);
     }).catch(err => console.log(err))
