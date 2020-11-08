@@ -1,4 +1,4 @@
-#About
+# About
 MERN Stack web application where users can create and participate in debates
 
 # Deployed Version
