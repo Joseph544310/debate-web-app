@@ -86,9 +86,9 @@ function Authentication(props) {
         <h3>Login</h3>
         <form onSubmit={login}>
           <label htmlFor="username">Username</label>
-          <input type='text' id='username' onChange={e => setLoginUsername(e.target.value)} value={loginUsername} required/>
+          <input type='text' id='username' placeholder='username' onChange={e => setLoginUsername(e.target.value)} value={loginUsername} required/>
           <label htmlFor="password">Password</label>
-          <input type='password' id='password' onChange= {e => setLoginPassword(e.target.value)} value={loginPassword} required/>
+          <input type='password' id='password'  placeholder='password' onChange= {e => setLoginPassword(e.target.value)} value={loginPassword} required/>
           <input className="btn btn-success" type='submit' value='Login'/>
           <p>{errorMessage}</p>
           <a href="#register"
@@ -105,11 +105,11 @@ function Authentication(props) {
         <h3>Register</h3>
         <form onSubmit={register}>
           <label htmlFor="username">Username</label>
-          <input type='text' id='username' onChange={e => setRegisterUsername(e.target.value)} value={registerUsername} required/>
+          <input type='text' id='username' placeholder='username' onChange={e => setRegisterUsername(e.target.value)} value={registerUsername} required/>
           <label htmlFor="password">Password</label>
-          <input type='password' id='password' onChange= {e => setRegisterPassword(e.target.value)} value={registerPassword} required/>
+          <input type='password' id='password' placeholder='password' onChange= {e => setRegisterPassword(e.target.value)} value={registerPassword} required/>
           <label htmlFor="password2">Confirm Password</label>
-          <input type='password' id='password2' onChange= {e => setRegisterConfirmPassword(e.target.value)} value={registerConfirmPassword} required/>
+          <input type='password' id='password2' placeholder='password' onChange= {e => setRegisterConfirmPassword(e.target.value)} value={registerConfirmPassword} required/>
           <input className="btn btn-success" type='submit' value='Register'/>
           <p>{errorMessage}</p>
           <a href="#login"
