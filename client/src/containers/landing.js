@@ -13,7 +13,7 @@ const Landing = props => {
                         <h2>Welcome to Debate-App</h2>
                         <p>
                             In this website you'll be able to register without
-                            being asked for any personal information so that
+                            being asked to enter any personal information so that
                             you can participate in debates freely and safely and
                             voice your opinions.
                         </p>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import {useParams} from 'react-router-dom'
 import {Card, Button, ListGroup} from 'react-bootstrap'
 import Axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './debateDetails.css'
 
 const DebateDetails = props => {
@@ -11,9 +13,19 @@ const DebateDetails = props => {
     const [comments, setComments] = useState([]);
     const [commentContent, setCommentContent] = useState('');
     const [votedSide, setVotedSide] = useState(false);
+    const [user, setUser] = useState(false);
     const {id} = useParams();
 
     useEffect( () => {
+        //Get user
+        Axios({
+            method: "GET",
+            withCredentials: true,
+            url: `http://localhost:5000/auth/user`
+          }).then(res => {
+            setUser(res.data.user);
+          }).catch(err => console.log(err))
+
         //Get debate
         Axios({
             method: "GET",
@@ -30,7 +42,6 @@ const DebateDetails = props => {
             url: `http://localhost:5000/debates/${id}/sides`
         }).then( res => {
             setSides(res.data.sides);
-            console.log(res.data)
             setVotedSide(res.data.votedSide);
         }).catch(err => console.log(err));
 
@@ -54,6 +65,7 @@ const DebateDetails = props => {
             withCredentials: true,
             url: `http://localhost:5000/debates/${id}/comments`
         }).then( res => {
+            setCommentContent('')
             setComments([...comments, res.data.comment]);
         }).catch( err => console.log(err));
     }
@@ -66,6 +78,16 @@ const DebateDetails = props => {
         }).then( res => {
             setVotedSide(side_id);
         }).catch(err => console.log(err));
+    }
+
+    const deleteComment = (comment_id, index) => {
+        Axios({
+            method: 'DELETE',
+            withCredentials: true,
+            url: `http://localhost:5000/debates/${id}/comments/${comment_id}`
+        }).then( res => {
+            setComments([...comments.slice(0, index), ...comments.slice(index+1)]);
+        }).catch(err => console.log(err))
     }
 
     return (
@@ -83,9 +105,16 @@ const DebateDetails = props => {
 
                 <ListGroup variant="flush" className='comments'>
                     <h4>Comments</h4>
-                    {comments.map(comment => {
+                    {comments.map((comment,index) => {
                         return (
-                            <ListGroup.Item key={comment._id}>{comment.author.username}: {comment.content}</ListGroup.Item>
+                            <ListGroup.Item key={comment._id}>
+                                {comment.author.username}: {comment.content}
+                                {user?user._id===comment.author.id?
+                                <span className='del-icon'>
+                                    <FontAwesomeIcon icon={faTrash} onClick={() => deleteComment(comment._id, index)}/>
+                                </span>:null:null}
+                                
+                            </ListGroup.Item>
                         );
                     })}
                     <form onSubmit={createComment}>
